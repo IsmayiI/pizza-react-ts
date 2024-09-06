@@ -1,13 +1,24 @@
+import { useEffect, useState } from 'react';
 import Categories from './components/Categories';
 import Header from './components/Header';
 import PizzaBlock from './components/PizzaBlock';
 import Sort from './components/Sort';
-import logo from './logo.svg';
 import './scss/app.scss';
 
-import pizzas from './assets/pizzas.json'
 
 function App() {
+   const [pizzas, setPizzas] = useState([])
+
+   useEffect(() => {
+      const getPizzas = async () => {
+         const res = await fetch('https://66dac750f47a05d55be5f0e1.mockapi.io/items')
+         const data = await res.json()
+         setPizzas(data)
+      }
+
+      getPizzas()
+   }, [])
+
    return (
       <div className="wrapper">
          <Header />
