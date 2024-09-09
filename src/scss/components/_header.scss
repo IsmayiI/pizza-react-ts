@@ -4,10 +4,24 @@
    border-bottom: 1px solid $gray-line;
    padding: 40px 0;
 
+   @media (max-width: 700px) {
+      padding: 10px 0;
+   }
+
    .container {
       display: flex;
       align-items: center;
       justify-content: space-between;
+
+      @media (max-width: 700px) {
+         flex-direction: column-reverse;
+         gap: 60px;
+
+         div {
+            align-self: end;
+         }
+
+      }
    }
 
    &__logo {
