@@ -7,29 +7,46 @@ import Skeleton from '../components/PizzaBlock/Skeleton';
 const Home = () => {
    const [pizzas, setPizzas] = useState([])
    const [isLoadingPizzas, setIsLoadingPizzas] = useState(true)
+   const [activeCategoryId, setActiveCategoryId] = useState(0)
+   const [activeSort, setActiveSort] = useState({ title: 'популярности', sort: 'rating' })
+
+
 
    useEffect(() => {
+      const category = activeCategoryId > 0 ? `category=${activeCategoryId}&` : ''
+      const sort = `sortBy=${activeSort.sort}&order=desc`
+
       const getPizzas = async () => {
+         setIsLoadingPizzas(true)
+
          try {
-            const res = await fetch('https://66dac750f47a05d55be5f0e1.mockapi.io/items')
+            const res = await fetch(`https://66dac750f47a05d55be5f0e1.mockapi.io/items?${category}${sort}`)
             if (!res.ok) throw new Error('Server error')
             const data = await res.json()
             setPizzas(data)
          } catch (err) {
             console.error(err);
          }
+
          setIsLoadingPizzas(false)
       }
 
       getPizzas()
       window.scrollTo(0, 0)
-   }, [])
+
+   }, [activeCategoryId, activeSort])
+
+
+   const onClickCategory = (id) => setActiveCategoryId(id)
+   const onClickSort = (sort) => setActiveSort(sort)
+
+
 
    return (
       <div className="container">
          <div className="content__top">
-            <Categories />
-            <Sort />
+            <Categories activeId={activeCategoryId} onClickCategory={onClickCategory} />
+            <Sort activeSort={activeSort} onClickSort={onClickSort} />
          </div>
          <h2 className="content__title">Все пиццы</h2>
          <div className="content__items">
