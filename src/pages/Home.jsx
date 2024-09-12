@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react';
+
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock'
 import Skeleton from '../components/PizzaBlock/Skeleton';
+import Pagination from '../components/Pagination';
 
 const Home = ({ searchValue }) => {
    const [pizzas, setPizzas] = useState([])
    const [isLoadingPizzas, setIsLoadingPizzas] = useState(true)
    const [activeCategoryId, setActiveCategoryId] = useState(0)
    const [activeSort, setActiveSort] = useState({ title: 'популярности', sort: 'rating' })
+   const [activePage, setActivePage] = useState(1)
 
 
    useEffect(() => {
@@ -20,7 +23,7 @@ const Home = ({ searchValue }) => {
          setIsLoadingPizzas(true)
 
          try {
-            const res = await fetch(`https://66dac750f47a05d55be5f0e1.mockapi.io/items?${category}${sort}${search}`)
+            const res = await fetch(`https://66dac750f47a05d55be5f0e1.mockapi.io/items?page=${activePage}&limit=4&${category}${sort}${search}`)
             if (!res.ok) throw new Error('Server error')
             const data = await res.json()
             setPizzas(data)
@@ -34,13 +37,14 @@ const Home = ({ searchValue }) => {
       getPizzas()
       window.scrollTo(0, 0)
 
-   }, [activeCategoryId, activeSort, searchValue])
+   }, [activeCategoryId, activeSort, searchValue, activePage])
 
 
    const onClickCategory = (id) => setActiveCategoryId(id)
    const onClickSort = (sort) => setActiveSort(sort)
 
-
+   const skeletonsContent = [...new Array(4)].map((_, i) => <Skeleton key={i} />)
+   const pizzasContent = pizzas.map(pizza => <PizzaBlock key={pizza.id} {...pizza} />)
 
    return (
       <div className="container">
@@ -50,11 +54,9 @@ const Home = ({ searchValue }) => {
          </div>
          <h2 className="content__title">Все пиццы</h2>
          <div className="content__items">
-            {isLoadingPizzas
-               ? [...new Array(12)].map((_, i) => <Skeleton key={i} />)
-               : pizzas.map(pizza => <PizzaBlock key={pizza.id} {...pizza} />)
-            }
+            {isLoadingPizzas ? skeletonsContent : pizzasContent}
          </div>
+         <Pagination activePage={activePage} setActivePage={setActivePage} />
       </div>
    )
 }
