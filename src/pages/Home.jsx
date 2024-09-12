@@ -4,23 +4,23 @@ import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock'
 import Skeleton from '../components/PizzaBlock/Skeleton';
 
-const Home = () => {
+const Home = ({ searchValue }) => {
    const [pizzas, setPizzas] = useState([])
    const [isLoadingPizzas, setIsLoadingPizzas] = useState(true)
    const [activeCategoryId, setActiveCategoryId] = useState(0)
    const [activeSort, setActiveSort] = useState({ title: 'популярности', sort: 'rating' })
 
 
-
    useEffect(() => {
       const category = activeCategoryId > 0 ? `category=${activeCategoryId}&` : ''
       const sort = `sortBy=${activeSort.sort}&order=desc`
+      const search = searchValue ? `&search=${searchValue}` : ''
 
       const getPizzas = async () => {
          setIsLoadingPizzas(true)
 
          try {
-            const res = await fetch(`https://66dac750f47a05d55be5f0e1.mockapi.io/items?${category}${sort}`)
+            const res = await fetch(`https://66dac750f47a05d55be5f0e1.mockapi.io/items?${category}${sort}${search}`)
             if (!res.ok) throw new Error('Server error')
             const data = await res.json()
             setPizzas(data)
@@ -34,7 +34,7 @@ const Home = () => {
       getPizzas()
       window.scrollTo(0, 0)
 
-   }, [activeCategoryId, activeSort])
+   }, [activeCategoryId, activeSort, searchValue])
 
 
    const onClickCategory = (id) => setActiveCategoryId(id)
