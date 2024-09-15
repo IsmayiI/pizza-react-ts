@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { setSort } from "../redux/slices/filterSlice"
 
 const sorts = [
    { title: 'популярности', sort: 'rating' },
@@ -6,11 +8,13 @@ const sorts = [
    { title: 'алфавиту', sort: 'title' },
 ]
 
-const Sort = ({ activeSort, onClickSort }) => {
+const Sort = () => {
+   const { sort: activeSort } = useSelector((state) => state.filter)
+   const dispatch = useDispatch()
    const [isActivePopup, setIsActivePopup] = useState(false)
 
    const onClickHandler = (sort) => {
-      onClickSort(sort)
+      dispatch(setSort(sort))
       setIsActivePopup(false)
    }
 
