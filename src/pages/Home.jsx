@@ -9,11 +9,10 @@ import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
 
 const Home = ({ searchValue }) => {
-   const { categoryId, sort } = useSelector((state) => state.filter)
+   const { categoryId, sort, activePage } = useSelector((state) => state.filter)
 
    const [pizzas, setPizzas] = useState([])
    const [isLoadingPizzas, setIsLoadingPizzas] = useState(true)
-   const [activePage, setActivePage] = useState(1)
 
 
    useEffect(() => {
@@ -63,7 +62,7 @@ const Home = ({ searchValue }) => {
          <div className="content__items">
             {isLoadingPizzas ? skeletonsContent : pizzasContent}
          </div>
-         <Pagination activePage={activePage} setActivePage={setActivePage} />
+         <Pagination />
       </div>
    )
 }
