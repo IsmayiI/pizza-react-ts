@@ -1,7 +1,15 @@
 
+import { useRef } from 'react'
 import styles from './Search.module.scss'
 
 const Search = ({ searchValue, setSearchValue }) => {
+   const inputRef = useRef()
+
+   const onClear = () => {
+      setSearchValue('')
+      inputRef.current.focus()
+   }
+
    return (
       <div className={styles.root}>
          <svg
@@ -13,11 +21,12 @@ const Search = ({ searchValue, setSearchValue }) => {
             />
          </svg>
          <input
+            ref={inputRef}
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
             placeholder="Поиск пиццы..." />
          <svg
-            onClick={() => setSearchValue('')}
+            onClick={onClear}
             className={styles.close}
             style={searchValue ? { visibility: 'visible' } : { visibility: 'hidden' }}
             xmlns="http://www.w3.org/2000/svg"

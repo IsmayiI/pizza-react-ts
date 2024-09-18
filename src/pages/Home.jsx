@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
@@ -24,10 +25,18 @@ const Home = ({ searchValue }) => {
          setIsLoadingPizzas(true)
 
          try {
-            const res = await fetch(`https://66dac750f47a05d55be5f0e1.mockapi.io/items?page=${activePage}&limit=4&${category}${sortStr}${search}`)
-            if (!res.ok) throw new Error('Server error')
-            const data = await res.json()
-            setPizzas(data)
+            const { data } = await axios.get('https://66dac750f47a05d55be5f0e1.mockapi.io/items', {
+               params: {
+                  page: activePage,
+                  limit: 4,
+                  category: categoryId || undefined,
+                  sortBy: sort.sort,
+                  order: 'desc',
+                  search: searchValue || undefined
+               }
+            });
+
+            setPizzas(data);
          } catch (err) {
             console.error(err);
          }
