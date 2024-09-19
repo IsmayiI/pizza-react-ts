@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setSort } from "../redux/slices/filterSlice"
 
-const sorts = [
+export const sorts = [
    { title: 'популярности', sort: 'rating' },
    { title: 'цене', sort: 'price' },
    { title: 'алфавиту', sort: 'title' },
