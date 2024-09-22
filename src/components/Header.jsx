@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom'
 
 import logoSvg from '../assets/img/pizza-logo.svg'
 import Search from './Search'
+import { selectTotalCount, selectTotalPrice } from '../redux/slices/cartSlice'
 
 const Header = ({ searchValue, setSearchValue }) => {
-   const { totalPrice, items } = useSelector(state => state.cart)
+   const totalPrice = useSelector(selectTotalPrice)
+   const totalCount = useSelector(selectTotalCount)
 
    return (
       <div className="header">
@@ -53,7 +55,7 @@ const Header = ({ searchValue, setSearchValue }) => {
                         strokeLinejoin="round"
                      />
                   </svg>
-                  <span>{items.length}</span>
+                  <span>{totalCount}</span>
                </Link>
             </div>
          </div>
