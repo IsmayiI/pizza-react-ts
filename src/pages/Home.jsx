@@ -1,21 +1,21 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import qs from 'qs';
 
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock'
 import Skeleton from '../components/PizzaBlock/Skeleton';
+import Error from '../components/PizzaBlock/Error';
 import Pagination from '../components/Pagination';
 import { setFilters } from '../redux/slices/filterSlice';
+import { getPizzas } from '../redux/slices/PizzaSlice';
 
 const Home = ({ searchValue }) => {
    const { categoryId, sort, activePage } = useSelector((state) => state.filter)
+   const { pizzas, status } = useSelector(state => state.pizza)
 
-   const [pizzas, setPizzas] = useState([])
-   const [isLoadingPizzas, setIsLoadingPizzas] = useState(true)
    const isSearch = useRef(false)
    const isMounted = useRef(false)
 
@@ -47,7 +47,9 @@ const Home = ({ searchValue }) => {
    }, [])
 
    useEffect(() => {
-      if (!isSearch.current) getPizzas()
+      if (!isSearch.current) {
+         dispatch(getPizzas({ activePage, categoryId, sort, searchValue }))
+      }
 
       isSearch.current = false
       window.scrollTo(0, 0)
@@ -55,31 +57,6 @@ const Home = ({ searchValue }) => {
 
 
 
-
-
-
-   const getPizzas = async () => {
-      setIsLoadingPizzas(true)
-
-      try {
-         const { data } = await axios.get('https://66dac750f47a05d55be5f0e1.mockapi.io/items', {
-            params: {
-               page: activePage,
-               limit: 4,
-               category: categoryId || undefined,
-               sortBy: sort.sort,
-               order: 'desc',
-               search: searchValue || undefined
-            }
-         });
-
-         setPizzas(data);
-      } catch (err) {
-         console.error(err);
-      }
-
-      setIsLoadingPizzas(false)
-   }
    const skeletonsContent = [...new Array(4)].map((_, i) => <Skeleton key={i} />)
    const pizzasContent = pizzas.map(pizza => <PizzaBlock key={pizza.id} {...pizza} />)
 
@@ -90,8 +67,9 @@ const Home = ({ searchValue }) => {
             <Sort />
          </div>
          <h2 className="content__title">Все пиццы</h2>
+         {status === 'error' && <Error />}
          <div className="content__items">
-            {isLoadingPizzas ? skeletonsContent : pizzasContent}
+            {status === 'loading' ? skeletonsContent : pizzasContent}
          </div>
          <Pagination />
       </div>
