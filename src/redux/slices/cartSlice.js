@@ -39,6 +39,8 @@ const cartSlice = createSlice({
    }
 });
 
+export const selectCart = (state) => state.cart
+
 export const selectTotalPrice = (state) => {
    return state.cart.items.reduce((sum, item) => (item.price * item.count) + sum, 0);
 };

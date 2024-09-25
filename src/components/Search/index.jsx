@@ -3,12 +3,12 @@ import { useCallback, useRef, useState } from 'react'
 import styles from './Search.module.scss'
 import debounce from 'lodash.debounce'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSearchValue } from '../../redux/slices/filterSlice'
+import { selectFilter, setSearchValue } from '../../redux/slices/filterSlice'
 
 const Search = () => {
    const dispatch = useDispatch()
 
-   const { searchValue } = useSelector(state => state.filter)
+   const { searchValue } = useSelector(selectFilter)
    const [inputValue, setInputValue] = useState(searchValue)
    const inputRef = useRef()
 

@@ -2,10 +2,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import ReactPaginate from 'react-paginate';
 import styles from './Pagination.module.scss'
 
-import { setActivePage } from '../../redux/slices/filterSlice';
+import { selectFilter, setActivePage } from '../../redux/slices/filterSlice';
 
 const Pagination = () => {
-   const { activePage } = useSelector((state) => state.filter)
+   const { activePage } = useSelector(selectFilter)
    const dispatch = useDispatch()
 
    return (

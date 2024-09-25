@@ -9,12 +9,12 @@ import PizzaBlock from '../components/PizzaBlock'
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Error from '../components/PizzaBlock/Error';
 import Pagination from '../components/Pagination';
-import { setFilters } from '../redux/slices/filterSlice';
-import { getPizzas } from '../redux/slices/PizzaSlice';
+import { selectFilter, setFilters } from '../redux/slices/filterSlice';
+import { getPizzas, selectPizza } from '../redux/slices/PizzaSlice';
 
 const Home = () => {
-   const { categoryId, sort, activePage, searchValue } = useSelector((state) => state.filter)
-   const { pizzas, status } = useSelector(state => state.pizza)
+   const { categoryId, sort, activePage, searchValue } = useSelector(selectFilter)
+   const { pizzas, status } = useSelector(selectPizza)
 
    const isSearch = useRef(false)
    const isMounted = useRef(false)
