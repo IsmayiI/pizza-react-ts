@@ -12,8 +12,8 @@ import Pagination from '../components/Pagination';
 import { setFilters } from '../redux/slices/filterSlice';
 import { getPizzas } from '../redux/slices/PizzaSlice';
 
-const Home = ({ searchValue }) => {
-   const { categoryId, sort, activePage } = useSelector((state) => state.filter)
+const Home = () => {
+   const { categoryId, sort, activePage, searchValue } = useSelector((state) => state.filter)
    const { pizzas, status } = useSelector(state => state.pizza)
 
    const isSearch = useRef(false)

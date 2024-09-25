@@ -5,7 +5,7 @@ import logoSvg from '../assets/img/pizza-logo.svg'
 import Search from './Search'
 import { selectTotalCount, selectTotalPrice } from '../redux/slices/cartSlice'
 
-const Header = ({ searchValue, setSearchValue }) => {
+const Header = () => {
    const totalPrice = useSelector(selectTotalPrice)
    const totalCount = useSelector(selectTotalCount)
 
@@ -21,7 +21,7 @@ const Header = ({ searchValue, setSearchValue }) => {
                   </div>
                </div>
             </Link>
-            <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+            <Search />
             <div className="header__cart">
                <Link to="/cart" className="button button--cart">
                   <span>{totalPrice} ₽</span>

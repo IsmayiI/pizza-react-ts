@@ -4,6 +4,7 @@ import { sorts } from "../../components/Sort"
 const initialState = {
    categoryId: 0,
    activePage: 1,
+   searchValue: '',
    sort: { title: 'популярности', sort: 'rating' }
 }
 
@@ -16,6 +17,9 @@ const filterSlice = createSlice({
       },
       setActivePage: (state, action) => {
          state.activePage = action.payload
+      },
+      setSearchValue: (state, action) => {
+         state.searchValue = action.payload
       },
       setSort: (state, action) => {
          state.sort = action.payload
@@ -33,6 +37,6 @@ const filterSlice = createSlice({
 })
 
 
-export const { setCategoryId, setSort, setActivePage, setFilters } = filterSlice.actions
+export const { setCategoryId, setSort, setActivePage, setFilters, setSearchValue } = filterSlice.actions
 
 export default filterSlice.reducer
