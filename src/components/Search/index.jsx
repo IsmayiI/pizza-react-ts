@@ -12,8 +12,12 @@ const Search = () => {
    const [inputValue, setInputValue] = useState(searchValue)
    const inputRef = useRef()
 
+   console.log(searchValue);
+
+
    const onClear = () => {
       dispatch(setSearchValue(''))
+      setInputValue('')
       inputRef.current.focus()
    }
 
