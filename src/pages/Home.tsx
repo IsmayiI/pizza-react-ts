@@ -48,6 +48,7 @@ const Home = () => {
 
    useEffect(() => {
       if (!isSearch.current) {
+         // @ts-ignore
          dispatch(getPizzas({ activePage, categoryId, sort, searchValue }))
       }
 
@@ -58,7 +59,7 @@ const Home = () => {
 
 
    const skeletonsContent = [...new Array(4)].map((_, i) => <Skeleton key={i} />)
-   const pizzasContent = pizzas.map(pizza => <PizzaBlock key={pizza.id} {...pizza} />)
+   const pizzasContent = pizzas.map((pizza: any) => <PizzaBlock key={pizza.id} {...pizza} />)
 
    return (
       <div className="container">

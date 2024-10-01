@@ -10,22 +10,22 @@ const Search = () => {
 
    const { searchValue } = useSelector(selectFilter)
    const [inputValue, setInputValue] = useState(searchValue)
-   const inputRef = useRef()
+   const inputRef = useRef<HTMLInputElement>(null)
 
    const onClear = () => {
       dispatch(setSearchValue(''))
       setInputValue('')
-      inputRef.current.focus()
+      inputRef.current?.focus()
    }
 
    const debouncedSetSearchValue = useCallback(
-      debounce((value) => {
+      debounce((value: any) => {
          dispatch(setSearchValue(value))
       }, 500),
       []
    )
 
-   const onChangeInput = (e) => {
+   const onChangeInput = (e: any) => {
       setInputValue(e.target.value)
       debouncedSetSearchValue(e.target.value)
    }

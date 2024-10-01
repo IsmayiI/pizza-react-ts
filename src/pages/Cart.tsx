@@ -92,7 +92,7 @@ const Cart = () => {
                   </div>
                </div>
                <div className="content__items">
-                  {!!items.length && items.map((item) => (
+                  {!!items.length && items.map((item: any) => (
                      <CartItem key={item.id} {...item} />
                   ))}
                </div>
