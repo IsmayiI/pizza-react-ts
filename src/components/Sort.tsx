@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { selectFilter, setSort } from "../redux/slices/filterSlice"
 
@@ -21,8 +21,8 @@ const Sort = () => {
    const dispatch = useDispatch()
 
    useEffect(() => {
-      const handleClickOutside = (event: any) => {
-         if (sortRef.current && !sortRef.current.contains(event.target)) {
+      const handleClickOutside = (event: MouseEvent) => {
+         if (sortRef.current && !sortRef.current.contains(event.target as Node)) {
             setIsActivePopup(false)
          }
       };
