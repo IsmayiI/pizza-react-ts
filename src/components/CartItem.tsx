@@ -3,12 +3,11 @@ import { addItem, removeItem, minusItem } from "../redux/slices/cartSlice"
 
 interface CartItemProps extends CartItem { }
 
-const CartItem = (props: CartItemProps) => {
-   const { id, title, price, imageUrl, count, type, size } = props
+const CartItem = ({ id, title, price, imageUrl, count, type, size }: CartItemProps) => {
    const dispatch = useDispatch()
 
    const onPlusItem = () => {
-      dispatch(addItem(props))
+      dispatch(addItem({ id } as CartItem))
    }
 
    const onMinusItem = () => {
