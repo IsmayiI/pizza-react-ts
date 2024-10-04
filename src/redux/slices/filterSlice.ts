@@ -1,7 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { sorts } from "../../components/Sort"
+import { RootState } from "../store"
+import { ParsedQs } from "qs"
 
-const initialState = {
+interface State extends FilterProps { }
+
+
+const initialState: State = {
    categoryId: 0,
    activePage: 1,
    searchValue: '',
@@ -12,32 +17,32 @@ const filterSlice = createSlice({
    name: 'filter',
    initialState,
    reducers: {
-      setCategoryId: (state, action) => {
+      setCategoryId: (state, action: PayloadAction<number>) => {
          state.categoryId = action.payload
       },
-      setActivePage: (state, action) => {
+      setActivePage: (state, action: PayloadAction<number>) => {
          state.activePage = action.payload
       },
-      setSearchValue: (state, action) => {
+      setSearchValue: (state, action: PayloadAction<string>) => {
          state.searchValue = action.payload
       },
-      setSort: (state, action) => {
+      setSort: (state, action: PayloadAction<Sort>) => {
          state.sort = action.payload
       },
-      setFilters: (state, action) => {
+      setFilters: (state, action: PayloadAction<Filter>) => {
          const { category, page, sortBy } = action.payload
          return {
             ...state,
             categoryId: +category,
             activePage: +page,
-            sort: sorts.find(sort => sort.sort === sortBy),
+            sort: sorts.find(sort => sort.sort === sortBy)!,
          }
       }
    }
 })
 
 
-export const selectFilter = (state) => state.filter
+export const selectFilter = (state: RootState) => state.filter
 
 export const { setCategoryId, setSort, setActivePage, setFilters, setSearchValue } = filterSlice.actions
 

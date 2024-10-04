@@ -38,7 +38,7 @@ const Home = () => {
 
    useEffect(() => {
       if (window.location.search) {
-         const params = qs.parse(window.location.search.slice(1))
+         const params = qs.parse(window.location.search.slice(1)) as unknown as Filter
 
          dispatch(setFilters(params))
 
@@ -59,7 +59,7 @@ const Home = () => {
 
 
    const skeletonsContent = [...new Array(4)].map((_, i) => <Skeleton key={i} />)
-   const pizzasContent = pizzas.map((pizza: any) => <PizzaBlock key={pizza.id} {...pizza} />)
+   const pizzasContent = pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)
 
    return (
       <div className="container">

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import img from '../assets/img/empty-cart.png'
 
+
 const CartEmpty = () => (
    <div className="cart cart--empty">
       <h2>

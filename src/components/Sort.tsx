@@ -2,11 +2,6 @@ import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { selectFilter, setSort } from "../redux/slices/filterSlice"
 
-interface Sort {
-   title: string
-   sort: string
-}
-
 export const sorts: Sort[] = [
    { title: 'популярности', sort: 'rating' },
    { title: 'цене', sort: 'price' },
