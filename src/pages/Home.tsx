@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import qs from 'qs';
 
@@ -11,6 +11,7 @@ import Error from '../components/PizzaBlock/Error';
 import Pagination from '../components/Pagination';
 import { selectFilter, setFilters } from '../redux/slices/filterSlice';
 import { getPizzas, selectPizza } from '../redux/slices/PizzaSlice';
+import { useAppDispatch } from '../redux/store';
 
 const Home = () => {
    const { categoryId, sort, activePage, searchValue } = useSelector(selectFilter)
@@ -19,7 +20,7 @@ const Home = () => {
    const isSearch = useRef(false)
    const isMounted = useRef(false)
 
-   const dispatch = useDispatch()
+   const dispatch = useAppDispatch()
    const navigate = useNavigate()
 
    useEffect(() => {
@@ -48,7 +49,6 @@ const Home = () => {
 
    useEffect(() => {
       if (!isSearch.current) {
-         // @ts-ignore
          dispatch(getPizzas({ activePage, categoryId, sort, searchValue }))
       }
 
