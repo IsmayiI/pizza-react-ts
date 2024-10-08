@@ -45,15 +45,11 @@ const cartSlice = createSlice({
    }
 });
 
-export const selectCart = (state: RootState) => state.cart
+export const selectCartItems = (state: RootState) => state.cart.items
 
-export const selectTotalPrice = (state: RootState) => {
-   return state.cart.items.reduce((sum, item) => (item.price * item.count) + sum, 0);
-};
+export const selectTotalPrice = (state: RootState) => state.cart.items.reduce((sum, item) => (item.price * item.count) + sum, 0)
 
-export const selectTotalCount = (state: RootState) => {
-   return state.cart.items.reduce((sum, item) => item.count + sum, 0);
-};
+export const selectTotalCount = (state: RootState) => state.cart.items.reduce((sum, item) => item.count + sum, 0)
 
 export const { addItem, removeItem, minusItem, clearItems } = cartSlice.actions;
 

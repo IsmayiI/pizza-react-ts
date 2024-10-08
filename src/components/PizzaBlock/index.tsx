@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { addItem, selectCart } from "../../redux/slices/cartSlice"
+import { addItem, selectCartItems } from "../../redux/slices/cartSlice"
 
 interface PizzaBlockProps extends Pizza { }
 
@@ -8,7 +8,7 @@ const typesName = ['тонкое', 'традиционное']
 
 const PizzaBlock = ({ id, imageUrl, title, types, sizes, price, category, rating }: PizzaBlockProps) => {
    const dispatch = useDispatch()
-   const { items } = useSelector(selectCart)
+   const items = useSelector(selectCartItems)
 
    const [activeSizeIndex, setActiveSizeIndex] = useState(0)
    const [activeTypeIndex, setActiveTypeIndex] = useState(0)
