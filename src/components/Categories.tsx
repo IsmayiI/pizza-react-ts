@@ -1,10 +1,11 @@
+import { memo } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { selectFilter, setCategoryId } from "../redux/slices/filterSlice"
+import { selectCategoryId, setCategoryId } from "../redux/slices/filterSlice"
 
 const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
 
 const Categories = () => {
-   const { categoryId } = useSelector(selectFilter)
+   const categoryId = useSelector(selectCategoryId)
    const dispatch = useDispatch()
 
    return (
@@ -22,5 +23,5 @@ const Categories = () => {
    )
 }
 
-export default Categories
+export default memo(Categories)
 
