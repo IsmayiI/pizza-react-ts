@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react"
+import { memo, useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { selectFilter, setSort } from "../redux/slices/filterSlice"
+import { selectSort, setSort } from "../redux/slices/filterSlice"
 
 export const sorts: Sort[] = [
    { title: 'популярности', sort: 'rating' },
@@ -9,7 +9,7 @@ export const sorts: Sort[] = [
 ]
 
 const Sort = () => {
-   const { sort: activeSort } = useSelector(selectFilter)
+   const activeSort = useSelector(selectSort)
    const [isActivePopup, setIsActivePopup] = useState(false)
    const sortRef = useRef<HTMLDivElement>(null)
 
@@ -34,9 +34,6 @@ const Sort = () => {
       dispatch(setSort(sort))
       setIsActivePopup(false)
    }
-
-
-
 
 
 
@@ -76,4 +73,4 @@ const Sort = () => {
    )
 }
 
-export default Sort
+export default memo(Sort) 
