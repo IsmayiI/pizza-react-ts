@@ -1,3 +1,4 @@
+import { memo } from "react"
 
 const Error = () => (
    <div className="content__error-info">
@@ -8,4 +9,4 @@ const Error = () => (
    </div>
 )
 
-export default Error
+export default memo(Error)

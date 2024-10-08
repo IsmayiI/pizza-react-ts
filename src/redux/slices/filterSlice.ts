@@ -45,6 +45,8 @@ export const selectFilter = (state: RootState) => state.filter
 
 export const selectCategoryId = (state: RootState) => state.filter.categoryId
 export const selectSort = (state: RootState) => state.filter.sort
+export const selectActivePage = (state: RootState) => state.filter.activePage
+export const selectSearchValue = (state: RootState) => state.filter.searchValue
 
 export const { setCategoryId, setSort, setActivePage, setFilters, setSearchValue } = filterSlice.actions
 

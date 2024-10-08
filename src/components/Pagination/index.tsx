@@ -2,10 +2,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import ReactPaginate from 'react-paginate';
 import styles from './Pagination.module.scss'
 
-import { selectFilter, setActivePage } from '../../redux/slices/filterSlice';
+import { selectActivePage, setActivePage } from '../../redux/slices/filterSlice';
+import { memo } from 'react';
 
 const Pagination = () => {
-   const { activePage } = useSelector(selectFilter)
+   const activePage = useSelector(selectActivePage)
    const dispatch = useDispatch()
 
    return (
@@ -23,4 +24,4 @@ const Pagination = () => {
    )
 }
 
-export default Pagination
+export default memo(Pagination)

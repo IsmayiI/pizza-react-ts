@@ -1,14 +1,14 @@
 
-import { ChangeEvent, useCallback, useRef, useState } from 'react'
+import { ChangeEvent, memo, useCallback, useRef, useState } from 'react'
 import styles from './Search.module.scss'
 import debounce from 'lodash.debounce'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectFilter, setSearchValue } from '../../redux/slices/filterSlice'
+import { selectSearchValue, setSearchValue } from '../../redux/slices/filterSlice'
 
 const Search = () => {
    const dispatch = useDispatch()
 
-   const { searchValue } = useSelector(selectFilter)
+   const searchValue = useSelector(selectSearchValue)
    const [inputValue, setInputValue] = useState(searchValue)
    const inputRef = useRef<HTMLInputElement>(null)
 
@@ -61,7 +61,7 @@ const Search = () => {
    )
 }
 
-export default Search
+export default memo(Search)
 
 
 
