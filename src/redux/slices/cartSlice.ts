@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../store';
+import { getCartFromLS } from '../../utils/getCartFromLS';
+import { setCartFromLS } from '../../utils/setCartFromLS';
 
 
 interface State {
@@ -7,7 +9,7 @@ interface State {
 }
 
 const initialState: State = {
-   items: []
+   items: getCartFromLS()
 };
 
 const cartSlice = createSlice({
@@ -26,9 +28,11 @@ const cartSlice = createSlice({
                count: 1
             })
          }
+         setCartFromLS(state.items)
       },
       removeItem: (state, action: PayloadAction<number>) => {
          state.items = state.items.filter(item => item.id !== action.payload)
+         setCartFromLS(state.items)
       },
       minusItem: (state, action: PayloadAction<number>) => {
          const existItem = state.items.find(item => item.id === action.payload)
@@ -38,9 +42,11 @@ const cartSlice = createSlice({
          } else {
             state.items = state.items.filter(item => item.id !== action.payload)
          }
+         setCartFromLS(state.items)
       },
       clearItems: (state) => {
          state.items = []
+         setCartFromLS(state.items)
       }
    }
 });

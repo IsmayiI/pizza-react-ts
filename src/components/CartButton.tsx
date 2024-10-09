@@ -1,10 +1,26 @@
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
-import { selectTotalCount, selectTotalPrice } from "../redux/slices/cartSlice"
+import { selectCartItems, selectTotalCount, selectTotalPrice } from "../redux/slices/cartSlice"
+import { useEffect, useRef } from "react"
+import { setCartFromLS } from "../utils/setCartFromLS"
 
 const CartButton = () => {
    const totalPrice = useSelector(selectTotalPrice)
    const totalCount = useSelector(selectTotalCount)
+   const items = useSelector(selectCartItems)
+   const isMounted = useRef(false)
+
+   console.log(items);
+
+
+
+   useEffect(() => {
+      if (isMounted.current) {
+         setCartFromLS(items)
+      }
+
+      isMounted.current = true
+   }, [items])
 
    return (
       <div className="header__cart">
