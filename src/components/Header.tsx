@@ -1,10 +1,9 @@
 import { Link, useLocation } from 'react-router-dom'
 
 import logoSvg from '../assets/img/pizza-logo.svg'
-import Search from './Search'
-import CartButton from './CartButton'
+import { CartButton, Search } from '.'
 
-const Header = () => {
+export const Header = () => {
    const { pathname } = useLocation()
 
    return (
@@ -27,5 +26,3 @@ const Header = () => {
       </div>
    )
 }
-
-export default Header

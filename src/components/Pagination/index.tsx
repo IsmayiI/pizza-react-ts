@@ -5,7 +5,7 @@ import styles from './Pagination.module.scss'
 import { selectActivePage, setActivePage } from '../../redux/slices/filterSlice';
 import { memo } from 'react';
 
-const Pagination = () => {
+export const Pagination = memo(() => {
    const activePage = useSelector(selectActivePage)
    const dispatch = useDispatch()
 
@@ -22,6 +22,4 @@ const Pagination = () => {
          renderOnZeroPageCount={null}
       />
    )
-}
-
-export default memo(Pagination)
+})

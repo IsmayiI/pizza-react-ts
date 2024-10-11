@@ -6,7 +6,7 @@ interface PizzaBlockProps extends Pizza { }
 
 const typesName = ['тонкое', 'традиционное']
 
-const PizzaBlock = ({ id, imageUrl, title, types, sizes, price, category, rating }: PizzaBlockProps) => {
+export const PizzaBlock = ({ id, imageUrl, title, types, sizes, price, category, rating }: PizzaBlockProps) => {
    const dispatch = useDispatch()
    const items = useSelector(selectCartItems)
 
@@ -80,5 +80,3 @@ const PizzaBlock = ({ id, imageUrl, title, types, sizes, price, category, rating
       </div>
    )
 }
-
-export default PizzaBlock

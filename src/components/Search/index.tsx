@@ -5,7 +5,7 @@ import debounce from 'lodash.debounce'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectSearchValue, setSearchValue } from '../../redux/slices/filterSlice'
 
-const Search = () => {
+export const Search = memo(() => {
    const dispatch = useDispatch()
 
    const searchValue = useSelector(selectSearchValue)
@@ -59,9 +59,7 @@ const Search = () => {
          </svg>
       </div>
    )
-}
-
-export default memo(Search)
+})
 
 
 

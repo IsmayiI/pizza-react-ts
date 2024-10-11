@@ -4,7 +4,7 @@ import { selectCategoryId, setCategoryId } from "../redux/slices/filterSlice"
 
 const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
 
-const Categories = () => {
+export const Categories = memo(() => {
    const categoryId = useSelector(selectCategoryId)
    const dispatch = useDispatch()
 
@@ -21,7 +21,5 @@ const Categories = () => {
          </ul>
       </div>
    )
-}
-
-export default memo(Categories)
+})
 

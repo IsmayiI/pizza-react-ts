@@ -4,7 +4,7 @@ import { selectCartItems, selectTotalCount, selectTotalPrice } from "../redux/sl
 import { useEffect, useRef } from "react"
 import { setCartFromLS } from "../utils/setCartFromLS"
 
-const CartButton = () => {
+export const CartButton = () => {
    const totalPrice = useSelector(selectTotalPrice)
    const totalCount = useSelector(selectTotalCount)
    const items = useSelector(selectCartItems)
@@ -61,5 +61,3 @@ const CartButton = () => {
       </div>
    )
 }
-
-export default CartButton

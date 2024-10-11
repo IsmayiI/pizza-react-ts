@@ -1,7 +1,7 @@
 import styles from './NotFoundBlock.module.scss'
 
 
-const NotFoundBlock = () => (
+export const NotFoundBlock = () => (
    <div className={styles.root}>
       <h1>
          <span>😕</span>
@@ -11,5 +11,3 @@ const NotFoundBlock = () => (
       <p>К сожалению данная страница отсутствует в нашем интернет-магазине</p>
    </div>
 )
-
-export default NotFoundBlock

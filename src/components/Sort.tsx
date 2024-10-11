@@ -8,7 +8,7 @@ export const sorts: Sort[] = [
    { title: 'алфавиту', sort: 'title' },
 ]
 
-const Sort = () => {
+export const Sort = memo(() => {
    const activeSort = useSelector(selectSort)
    const [isActivePopup, setIsActivePopup] = useState(false)
    const sortRef = useRef<HTMLDivElement>(null)
@@ -71,6 +71,4 @@ const Sort = () => {
             </div>)}
       </div>
    )
-}
-
-export default memo(Sort) 
+})

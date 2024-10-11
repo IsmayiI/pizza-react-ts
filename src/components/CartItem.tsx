@@ -3,7 +3,7 @@ import { addItem, removeItem, minusItem } from "../redux/slices/cartSlice"
 
 interface CartItemProps extends CartItem { }
 
-const CartItem = ({ id, title, price, imageUrl, count, type, size }: CartItemProps) => {
+export const CartItem = ({ id, title, price, imageUrl, count, type, size }: CartItemProps) => {
    const dispatch = useDispatch()
 
    const onPlusItem = () => {
@@ -96,5 +96,3 @@ const CartItem = ({ id, title, price, imageUrl, count, type, size }: CartItemPro
       </div>
    )
 }
-
-export default CartItem
