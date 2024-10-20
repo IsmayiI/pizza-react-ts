@@ -1,6 +1,6 @@
 # Pizza React
 
-Countries is a comprehensive React application built using styled-components for styling and react-router-dom for navigation. It enables users to explore information about various countries by interacting with data from the REST Countries API (restcountries.com). The application allows users to search for countries by name, filter them by region, and view detailed information about each country, such as flags, capital, population, and more.
+Pizza React is an engaging React application that allows users to explore a variety of pizzas using data from a mock API. The app enables users to search, filter, and sort pizzas by various criteria while managing their selections through a shopping cart interface.
 
 ## Features
 
